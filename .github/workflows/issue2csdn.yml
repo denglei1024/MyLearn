@@ -1,0 +1,31 @@
+name: Issue to CSDN
+on:
+  issues:
+    # Sufficient to trigger this workflow when an issue is milestoned
+    types: [milestoned]
+    # types: [unlabeled, labeled, edited, milestoned]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == github.repository_owner }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'    
+      # use here
+      - uses: cloudswave/issue2csdn@main
+        with:
+          issue_url: ${{ github.event.issue.html_url }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          csdn_cookie: ${{ secrets.CSDN_COOKIE }}
+          ## optional below
+          markdowncontent: |
+            _本文同步于个人Github博客：[${{ github.event.issue.html_url }}](${{ github.event.issue.html_url }})，欢迎留言。_
+            ${{ github.event.issue.body }}          
+            
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.event.issue.number }}
+  cancel-in-progress: true 
