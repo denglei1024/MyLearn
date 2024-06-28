@@ -15,7 +15,46 @@
                     <title><![CDATA[邓磊's Blog]]></title>
                 <link>https://github.com/denglei1024/denglei1024.github.io</link>
             </image>
-        <lastBuildDate>Fri, 31 May 2024 01:34:43 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 28 Jun 2024 14:03:46 GMT</lastBuildDate>
+            <item>
+                <title><![CDATA[RocketMQ实战：日常开发中有哪些使用MQ的场景]]></title>
+                    <description><![CDATA[<div class="markdown-heading"><h2 class="heading-element">什么是消息队列？</h2><a id="user-content-什么是消息队列" class="anchor" aria-label="Permalink: 什么是消息队列？" href="#什么是消息队列"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>消息队列是一种通信方法，允许应用程序通过发送和接收消息来互相通信。这些消息/任务/指令存储在一个中间介质中（即队列），并由生产者发送，消费者接收。</p>
+<div class="markdown-heading"><h2 class="heading-element">使用场景</h2><a id="user-content-使用场景" class="anchor" aria-label="Permalink: 使用场景" href="#使用场景"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<div class="markdown-heading"><h3 class="heading-element">场景一：任务异步处理</h3><a id="user-content-场景一任务异步处理" class="anchor" aria-label="Permalink: 场景一：任务异步处理" href="#场景一任务异步处理"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>在某些情况下，任务的处理时间较长，可能会影响用户体验。例如，用户在网站上上传图片后，需要进行图片处理（如压缩、添加水印等）。如果在用户上传图片时同步进行这些处理，用户可能会感觉系统很慢。通过消息队列，可以将图片处理任务异步化：</p>
+<ol>
+<li>用户上传图片。</li>
+<li>图片上传成功后，将处理任务消息发送到队列。</li>
+<li>图片处理服务从队列中读取消息并进行处理。</li>
+</ol>
+<p>这样，用户可以在上传图片后立即进行其他操作，而图片处理服务可以在后台完成处理工作。
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/89115648c634d738bfc72515c8269d190805359dbd0c376d54c7ae5f40a0e0f4/68747470733a2f2f6e6f74652d313235313636383634372e636f732e61702d6e616e6a696e672e6d7971636c6f75642e636f6d2f32303234303632373232353831372e706e67"><img src="https://camo.githubusercontent.com/89115648c634d738bfc72515c8269d190805359dbd0c376d54c7ae5f40a0e0f4/68747470733a2f2f6e6f74652d313235313636383634372e636f732e61702d6e616e6a696e672e6d7971636c6f75642e636f6d2f32303234303632373232353831372e706e67" alt="image.png" data-canonical-src="https://note-1251668647.cos.ap-nanjing.myqcloud.com/20240627225817.png" style="max-width: 100%;"></a></p>
+<div class="markdown-heading"><h3 class="heading-element">场景二：系统解耦</h3><a id="user-content-场景二系统解耦" class="anchor" aria-label="Permalink: 场景二：系统解耦" href="#场景二系统解耦"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>在一个复杂的系统中，各个组件之间的直接依赖会导致系统难以维护和扩展。消息队列可以用来解耦这些组件，使得它们之间通过消息进行通信。例如，在一个网站中，用户注册后（用户中心），后续会送积分（积分系统）、发放优惠券（优惠券系统），可以通过消息队列进行解耦：</p>
+<ol>
+<li>用户注册。</li>
+<li>用户模块将用户注册消息发送给消息队列。</li>
+<li>积分系统和优惠券系统分别从队列中读取消息，来送积分和发放优惠券。</li>
+</ol>
+<p>这种方式使得用户中心、积分系统、优惠券系统不需要直接通信，可以独立扩展和维护。
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/c08da4f608532a5bd2762857454e6bef6dd95288461eca55b5be0da2fa831131/68747470733a2f2f6e6f74652d313235313636383634372e636f732e61702d6e616e6a696e672e6d7971636c6f75642e636f6d2f32303234303632373232353931332e706e67"><img src="https://camo.githubusercontent.com/c08da4f608532a5bd2762857454e6bef6dd95288461eca55b5be0da2fa831131/68747470733a2f2f6e6f74652d313235313636383634372e636f732e61702d6e616e6a696e672e6d7971636c6f75642e636f6d2f32303234303632373232353931332e706e67" alt="image.png" data-canonical-src="https://note-1251668647.cos.ap-nanjing.myqcloud.com/20240627225913.png" style="max-width: 100%;"></a></p>
+<div class="markdown-heading"><h3 class="heading-element">使用场景三：负载均衡（流量削峰）</h3><a id="user-content-使用场景三负载均衡流量削峰" class="anchor" aria-label="Permalink: 使用场景三：负载均衡（流量削峰）" href="#使用场景三负载均衡流量削峰"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>在许多应用中，需要对实时数据进行处理，例如金融交易、物联网数据监控等。这些数据通常以高频率产生，需要快速处理和分析。通过消息队列，可以实现实时数据处理的负载均衡：</p>
+<ol>
+<li>数据产生源（如传感器、交易系统）将数据发送到队列。</li>
+<li>多个数据处理服务实例从队列中读取数据并进行处理和分析。</li>
+</ol>
+<p>这种方式可以确保实时数据被均匀分配到多个处理实例，避免单个实例的过载，同时提高数据处理的效率和可靠性。</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/577c8f77531eb7c951578af170b487d72b851c13d41f439dc627e0f55733b6c4/68747470733a2f2f6e6f74652d313235313636383634372e636f732e61702d6e616e6a696e672e6d7971636c6f75642e636f6d2f32303234303632373233303435342e706e67"><img src="https://camo.githubusercontent.com/577c8f77531eb7c951578af170b487d72b851c13d41f439dc627e0f55733b6c4/68747470733a2f2f6e6f74652d313235313636383634372e636f732e61702d6e616e6a696e672e6d7971636c6f75642e636f6d2f32303234303632373233303435342e706e67" alt="image.png" data-canonical-src="https://note-1251668647.cos.ap-nanjing.myqcloud.com/20240627230454.png" style="max-width: 100%;"></a></p>
+<div class="markdown-heading"><h2 class="heading-element">总结</h2><a id="user-content-总结" class="anchor" aria-label="Permalink: 总结" href="#总结"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>消息队列是一种强大的工具，可以用于任务异步处理、系统解耦和负载均衡等场景。它能够提高系统的性能和可扩展性，在复杂的软件系统中会经常使用到，也是要掌握的重要技能之一。</p>
+]]></description>
+                    <pubDate>Fri, 28 Jun 2024 14:03:32 GMT</pubDate>
+                        <guid isPermaLink="false">https://github.com/denglei1024/denglei1024.github.io/issues/7</guid>
+                <link>https://github.com/denglei1024/denglei1024.github.io/issues/7</link>
+                    <author><![CDATA[denglei1024]]></author>
+            </item>
             <item>
                 <title><![CDATA[MyBatis是如何进行数据库连接配置的]]></title>
                     <description><![CDATA[<p>MyBatis 是一个流行的持久层框架，它通过使用XML或注解的方式将SQL语句、存储过程和Java方法进行绑定，从而避免了手写大量的JDBC代码和手动设置参数与结果集。以下是 MyBatis 连接数据库的基本步骤和机制：</p>
