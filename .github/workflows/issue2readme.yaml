@@ -20,6 +20,6 @@ jobs:
         with:
           # Define the README.md header content
           blog_author: "邓磊"
-          recent_title: "最近更新"
-          top_title: "置顶"
-          links_title: "链接"
+          # recent_title: "最近更新"
+          # top_title: "置顶"
+          # links_title: "链接"
