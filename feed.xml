@@ -15,7 +15,55 @@
                     <title><![CDATA[邓磊's Blog]]></title>
                 <link>https://github.com/denglei1024/denglei1024.github.io</link>
             </image>
-        <lastBuildDate>Fri, 28 Jun 2024 14:05:36 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 29 Jun 2024 15:50:08 GMT</lastBuildDate>
+            <item>
+                <title><![CDATA[RocketMQ实战：一键在docker中搭建rocketmq和doshboard环境]]></title>
+                    <description><![CDATA[<p>在本篇博客中，我们将详细介绍如何在 Docker 环境中一键部署 RocketMQ 和其 Dashboard。这个过程基于一个预配置的 Docker Compose 文件，使得部署变得简单高效。</p>
+<div class="markdown-heading"><h3 class="heading-element">项目介绍</h3><a id="user-content-项目介绍" class="anchor" aria-label="Permalink: 项目介绍" href="#项目介绍"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>该项目提供了一套 Docker Compose 配置，用于快速部署 RocketMQ 及其 Dashboard。项目包含必要的配置文件和目录结构，以确保数据持久化和服务的正常运行。</p>
+<div class="markdown-heading"><h3 class="heading-element">快速开始指南</h3><a id="user-content-快速开始指南" class="anchor" aria-label="Permalink: 快速开始指南" href="#快速开始指南"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<div class="markdown-heading"><h4 class="heading-element">第一步：克隆仓库</h4><a id="user-content-第一步克隆仓库" class="anchor" aria-label="Permalink: 第一步：克隆仓库" href="#第一步克隆仓库"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>首先，克隆项目仓库到您的本地环境中：</p>
+<div class="highlight highlight-source-shell"><pre>git clone git@github.com:denglei1024/docker-rocketmq-dashboard.git
+<span class="pl-c1">cd</span> docker-rocketmq-dashboard</pre></div>
+<div class="markdown-heading"><h4 class="heading-element">第二步：修改配置文件</h4><a id="user-content-第二步修改配置文件" class="anchor" aria-label="Permalink: 第二步：修改配置文件" href="#第二步修改配置文件"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>在启动容器之前，您可能需要根据实际需求修改 <code>conf/broker.conf</code> 配置文件。该文件包含 RocketMQ Broker 的相关配置。</p>
+<div class="markdown-heading"><h4 class="heading-element">第三步：启动容器</h4><a id="user-content-第三步启动容器" class="anchor" aria-label="Permalink: 第三步：启动容器" href="#第三步启动容器"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>使用以下命令启动 Docker 容器：</p>
+<div class="highlight highlight-source-shell"><pre>docker-compose -p rocketmql_project up -d</pre></div>
+<p>该命令将以分离模式启动所有容器。</p>
+<div class="markdown-heading"><h4 class="heading-element">第四步：访问 Dashboard</h4><a id="user-content-第四步访问-dashboard" class="anchor" aria-label="Permalink: 第四步：访问 Dashboard" href="#第四步访问-dashboard"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>容器启动完成后，您可以通过以下地址访问 RocketMQ Dashboard：</p>
+<p><a href="http://localhost:8080" rel="nofollow">http://localhost:8080/</a></p>
+<div class="markdown-heading"><h3 class="heading-element">项目结构</h3><a id="user-content-项目结构" class="anchor" aria-label="Permalink: 项目结构" href="#项目结构"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>该项目的目录结构如下：</p>
+<ul>
+<li>
+<code>config/</code>: 包含 RocketMQ 的配置文件
+<ul>
+<li>
+<code>broker.conf</code>: Broker 配置文件</li>
+</ul>
+</li>
+<li>
+<code>data/</code>: 数据持久化目录
+<ul>
+<li>
+<code>broker/</code>: Broker 数据和日志</li>
+<li>
+<code>namesrv/</code>: Namesrv 数据和日志</li>
+</ul>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/denglei1024/docker-rocketmq-dashboard/assets/16712298/6381ad11-2a18-4302-877a-f947bfa0fbb4"><img src="https://github.com/denglei1024/docker-rocketmq-dashboard/assets/16712298/6381ad11-2a18-4302-877a-f947bfa0fbb4" alt="RocketMQ Dashboard" style="max-width: 100%;"></a></p>
+<div class="markdown-heading"><h3 class="heading-element">结语</h3><a id="user-content-结语" class="anchor" aria-label="Permalink: 结语" href="#结语"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>通过以上步骤，您可以快速部署并运行 RocketMQ 及其 Dashboard。该项目的 Docker Compose 配置简化了部署过程，使得开发和测试变得更加高效。</p>
+]]></description>
+                    <pubDate>Sat, 29 Jun 2024 15:49:58 GMT</pubDate>
+                        <guid isPermaLink="false">https://github.com/denglei1024/denglei1024.github.io/issues/8</guid>
+                <link>https://github.com/denglei1024/denglei1024.github.io/issues/8</link>
+                    <author><![CDATA[denglei1024]]></author>
+            </item>
             <item>
                 <title><![CDATA[RocketMQ实战：日常开发中有哪些使用MQ的场景]]></title>
                     <description><![CDATA[<div class="markdown-heading"><h2 class="heading-element">什么是消息队列？</h2><a id="user-content-什么是消息队列" class="anchor" aria-label="Permalink: 什么是消息队列？" href="#什么是消息队列"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
